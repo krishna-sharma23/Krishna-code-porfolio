@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=prg16
+comment0.text=How\ to\ solve\r\n\ move\ in\ the\ array\ from\ right\ to\ left\r\n\ store\ the\ greatest\ num\ in\ a\ stack\r\n\ then\ checking\ the\ topmost\ value\ \ i.e.\ just\ greater\ than\ the\ element\r\n\ if\ stack\ is\ empty\ no\ greater\ value\ -1\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+numComments=2
