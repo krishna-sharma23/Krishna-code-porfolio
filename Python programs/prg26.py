@@ -1,0 +1,11 @@
+from tkinter import *
+window=Tk()
+window.geometry("420x100")
+ent1=Entry(window,font=("Comic Sans", 10, "bold"))
+ent1.place(x=0,y=0,height=30,width=420)
+label=Label(window)
+label.place(x=0,y=30,height=50,width=200)
+var=StringVar()
+var.trace_add("write")
+window.title("word counter")
+window.mainloop()
