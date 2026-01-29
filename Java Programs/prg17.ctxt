@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.target=prg17
-comment0.text=\ How\ we\ are\ going\ to\ solve\ this\ problem\r\n\ we\ will\ be\ having\ a\ string\r\n\ we\ will\ moving\ from\ left\ to\ right\r\n\ whenever\ we\ will\ find\ a\ operator\ we\ will\ store\ it\ and\ then\ pop\ two\ numbers\ \r\n\ after\ solving\ we\ will\ be\ pushing\ it\ back\ to\ the\ stack\r\n
-comment1.params=args
-comment1.target=void\ main(java.lang.String[])
-numComments=2
