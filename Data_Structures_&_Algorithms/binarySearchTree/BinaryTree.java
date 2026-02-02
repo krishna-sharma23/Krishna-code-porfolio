@@ -1,5 +1,7 @@
 package binarySearchTree;
 
+import java.util.*;
+
 class Node{
 	int data;
 	Node left;
@@ -77,5 +79,76 @@ class BinaryTree{
 		if(node.data < key) return searchRec(node.right, key);
 		else return searchRec(node.left, key);
 	}
+	
+	public void delete(int val) {
+		deleteRec(root, val);
+	}
+
+	private Node deleteRec(Node root, int val) {
+		if(root.data > val) root.left = deleteRec(root.left, val);
+		else if(root.data < val) root.right = deleteRec(root.right, val);
+		else { //when root.data == val
+			//Case 1
+			if(root.left == null && root.right == null) {
+				return null;
+			}
+			//Case 2
+			if(root.left == null) return root.right;
+			else if(root.right == null) return root.left;
+			//Case 3
+			Node IS = inorderSucessor(root.right);
+			root.data = IS.data;
+			root.right = deleteRec(root.right, IS.data);
+		}
+		return root;
+	}
+
+	private Node inorderSucessor(Node root) {
+		while(root.left != null) root = root.left;
+		return root;
+	}
+	
+	public void printInRange(int low, int high) {
+		print(root, low, high);
+	}
+
+	private void print(Node root, int low, int high) {
+		if(root == null) return;
+		
+		if(root.data >= low && root.data <= high) {
+			print(root.left, low, high);
+			System.out.print(root.data + " ");
+			print(root.right, low, high);
+		}
+		else if(root.data < low) print(root.right, low, high);
+		else print(root.left, low, high);
+	}
+	
+	public void printRoot2leaf() {
+		Root2Leaf(root, new ArrayList<>());
+	}
+
+	private void Root2Leaf(Node root, ArrayList<Integer> path) {
+		if(root == null) return;
+		
+		path.add(root.data);
+		
+		if(root.left == null && root.right == null) {
+			printPath(path);
+		}
+		else {
+			Root2Leaf(root.left, path);
+			Root2Leaf(root.right, path);
+		}
+		path.remove(path.size() - 1);
+	}
+
+	private void printPath(ArrayList<Integer> path) {
+		for(int i = 0; i < path.size(); i++) {
+			System.out.print(path.get(i) + "->");
+		}
+		System.out.println();
+	}
+	
 	
 }

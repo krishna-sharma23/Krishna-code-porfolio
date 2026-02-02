@@ -21,6 +21,16 @@ class node{
 	}
 }
 
+class TreeInfo{
+	int ht;
+	int dia;
+	
+	TreeInfo(int height, int diameter){
+		ht = height;
+		dia = diameter;
+	}
+}
+
 class BinaryTree{
 	int idx = -1;
 	node buildTree(int[] nodes) {
@@ -77,6 +87,70 @@ class BinaryTree{
 			}
 		}
 	}
+	
+	int countNodes(node root) {
+		if(root == null) return 0;
+		
+		int leftNodes = countNodes(root.left);
+		int rightNodes = countNodes(root.right);
+		
+		return leftNodes + rightNodes + 1;
+	}
+	
+	int SumofNodes(node root) {
+		if(root == null) return 0;
+		
+		return root.data + SumofNodes(root.left) + SumofNodes(root.right);
+	}
+	
+	int heightOfTree(node root) {
+		if(root == null) {
+			return 0;
+		}
+		
+		int leftHeight = heightOfTree(root.left);
+		int rightHeight = heightOfTree(root.right);
+		
+		int myHeight = Math.max(leftHeight, rightHeight) + 1;
+		
+		return myHeight;
+	}
+	
+	//Finding the diameter
+	//Approach 1
+	int diameter1(node root) {
+		if(root == null) {
+			return 0;
+		}
+		
+		int dia1 = diameter1(root.left);
+		int dia2 = diameter1(root.right);
+		int dia3 = heightOfTree(root.left) + heightOfTree(root.right) + 1;
+		
+		int mydia = Math.max(dia3, Math.max(dia2, dia1));
+		
+		return mydia;
+	}
+	
+	//Approach 2
+	TreeInfo diameter2(node root) {
+		if(root == null) {
+			return new TreeInfo(0, 0);
+		}
+		
+		TreeInfo left = diameter2(root.left);
+		TreeInfo right = diameter2(root.right);
+		
+		int myHeight = Math.max(left.ht, right.ht) + 1;
+		int dia1 = left.dia;
+		int dia2 = right.dia;
+		int dia3 = left.ht + right.ht + 1;
+		
+		int myDia = Math.max(dia3, Math.max(dia2, dia1));
+		
+		return new TreeInfo(myHeight, myDia);
+		
+	}
 }
 
 public class Implementation {
@@ -86,7 +160,9 @@ public class Implementation {
 		int[] nodes = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
 		BinaryTree tree = new BinaryTree();
 		node root = tree.buildTree(nodes);
-		tree.levelOrder(root);
+//		tree.levelOrder(root);
+		System.out.println(tree.diameter2(root).dia);
+		System.out.println(tree.diameter2(root).ht);
 	}
 
 }
